@@ -48,6 +48,34 @@ class ItemTest {
     }
 
     @Test
+    void testSetName() {
+        assertEquals("Blender", testItem.getName());
+        testItem.setName("Screw Driver");
+        assertEquals("Screw Driver", testItem.getName());
+    }
+
+    @Test
+    void testSetQuantity() {
+        assertEquals(2, testItem.getQuantity());
+        testItem.setQuantity(4);
+        assertEquals(4, testItem.getQuantity());
+    }
+
+    @Test
+    void testSetPrice() {
+        assertEquals(35.50, testItem.getPrice());
+        testItem.setPrice(12.00);
+        assertEquals(12.00, testItem.getPrice());
+    }
+
+    @Test
+    void testSetStatus() {
+        assertEquals(PENDING, testItem.getStatus());
+        testItem.setStatus(PURCHASED);
+        assertEquals(PURCHASED, testItem.getStatus());
+    }
+
+    @Test
     void testToString() {
         assertEquals("2x Blender @ $35.5 Status: PENDING", testItem.toString());
     }

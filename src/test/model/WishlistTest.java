@@ -227,8 +227,10 @@ public class WishlistTest {
 
     @Test
     void testGetExpensiveIndividualItem() {
+        Item expensiveIndividualItem = new Item("Phone", 1, 800.00);
         checkInitialItemsState(testWishlist);
-        assertEquals(testItem1, testWishlist.getExpensiveIndividualItem());
+        testWishlist.addItem(expensiveIndividualItem);
+        assertEquals(expensiveIndividualItem, testWishlist.getExpensiveIndividualItem());
     }
 
     @Test
@@ -329,6 +331,27 @@ public class WishlistTest {
     void testGetIndexNumNotFound() {
         checkInitialItemsState(testWishlist);
         assertEquals(-1, testWishlist.getIndexNum("N/A"));
+    }
+
+    @Test
+    void testSetName() {
+        assertEquals("School Supplies", testWishlist.getName());
+        testWishlist.setName("Groceries");
+        assertEquals("Groceries", testWishlist.getName());
+    }
+
+    @Test
+    void testSetBudget() {
+        assertEquals(100.00, testWishlist.getBudget());
+        testWishlist.setBudget(200.00);
+        assertEquals(200.00, testWishlist.getBudget());
+    }
+
+    @Test
+    void testSetBudgetNegative() {
+        assertEquals(100.00, testWishlist.getBudget());
+        testWishlist.setBudget(-200.00);
+        assertEquals(0, testWishlist.getBudget());
     }
 
     private void checkInitialItemsState(Wishlist wishlist) {
