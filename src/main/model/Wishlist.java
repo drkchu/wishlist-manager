@@ -97,17 +97,17 @@ public class Wishlist {
 
     /*
      * REQUIRES: items is not empty
-     * EFFECTS: returns the average price per item in the wishlist, not accounting for quantity
+     * EFFECTS: returns the average cost per item in the wishlist, not accounting for quantity
      */
-    public double averagePricePerItem() {
+    public double averageCostPerItem() {
         return getTotalCosts() / items.size();
     }
 
     /*
      * REQUIRES: items is not empty
-     * EFFECTS: returns the average price per item in the wishlist, accounting for quantity
+     * EFFECTS: returns the average cost per item in the wishlist, accounting for quantity
      */
-    public double averagePricePerIndividualItem() {
+    public double averageCostPerQuantity() {
         return getTotalCosts() / getTotalQuantity();
     }
 
@@ -225,6 +225,18 @@ public class Wishlist {
         return false;
     }
 
+    /*
+     * EFFECTS: returns the index of the item with a matching name, -1 if the item can't be found
+     */
+    public int getIndexNum(String name) {
+        for (int k = 0; k < items.size(); k++) {
+            if (items.get(k).getName().equals(name)) {
+                return k;
+            }
+        }
+        return -1;
+    }
+
     public String getName() {
         return name;
     }
@@ -250,7 +262,11 @@ public class Wishlist {
     }
 
     public void setBudget(double budget) {
-        this.budget = budget;
+        if (budget > 0) {
+            this.budget = budget;
+        } else {
+            this.budget = 0;
+        }
     }
 
 

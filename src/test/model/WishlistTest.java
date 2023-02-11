@@ -200,15 +200,15 @@ public class WishlistTest {
     }
 
     @Test
-    void testAveragePricePerItem() {
+    void testAverageCostPerItem() {
         checkInitialItemsState(testWishlist);
-        assertEquals((15.00 + 1.00 * 20 + 6.00 * 2) / 3, testWishlist.averagePricePerItem());
+        assertEquals((15.00 + 1.00 * 20 + 6.00 * 2) / 3, testWishlist.averageCostPerItem());
     }
 
     @Test
-    void testAveragePricePerIndividualItem() {
+    void testAverageCostPerQuantity() {
         checkInitialItemsState(testWishlist);
-        assertEquals((15.00 + 1.00 * 20 + 6.00 * 2) / 23, testWishlist.averagePricePerIndividualItem());
+        assertEquals((15.00 + 1.00 * 20 + 6.00 * 2) / 23, testWishlist.averageCostPerQuantity());
     }
 
     @Test
@@ -317,6 +317,18 @@ public class WishlistTest {
     void testSortByIndividualPrice() {
         checkInitialItemsState(testWishlist);
         assertEquals(sortedItemsByIndividualPrice, testWishlist.sortByIndividualPrice());
+    }
+
+    @Test
+    void testGetIndexNumFound() {
+        checkInitialItemsState(testWishlist);
+        assertEquals(2, testWishlist.getIndexNum("Scissors"));
+    }
+
+    @Test
+    void testGetIndexNumNotFound() {
+        checkInitialItemsState(testWishlist);
+        assertEquals(-1, testWishlist.getIndexNum("N/A"));
     }
 
     private void checkInitialItemsState(Wishlist wishlist) {

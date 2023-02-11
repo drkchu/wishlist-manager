@@ -68,6 +68,6 @@ public class Item {
     // EFFECTS: returns a string representation of item
     @Override
     public String toString() {
-        return "[name = " + name + " quantity = " + quantity + " price = $" + price + " status = " + status + "]";
+        return quantity + "x " + name + " @ $" + price + " Status: " + status;
     }
 }

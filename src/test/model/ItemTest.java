@@ -46,4 +46,9 @@ class ItemTest {
     void testTotalPrice() {
         assertEquals(71.0, testItem.getTotalPrice());
     }
+
+    @Test
+    void testToString() {
+        assertEquals("2x Blender @ $35.5 Status: PENDING", testItem.toString());
+    }
 }
