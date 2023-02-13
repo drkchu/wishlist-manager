@@ -2,7 +2,7 @@ package model;
 
 import static model.ItemStatus.*;
 
-// Represents an item with a name, price (in dollars), quantity, location (to purchase), and a status
+// Represents an item with a name, quantity, price (in dollars), and a status
 public class Item {
     private String name;
     private int quantity;
@@ -63,7 +63,6 @@ public class Item {
     public double getTotalPrice() {
         return quantity * price;
     }
-
 
     // EFFECTS: returns a string representation of item
     @Override

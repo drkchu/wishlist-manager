@@ -261,6 +261,11 @@ public class Wishlist {
         this.name = name;
     }
 
+    /*
+     * MODIFIES: this
+     * EFFECTS: if budget is positive, sets the wishlists budget to budget, otherwise sets the budget of the wishlist
+     *          to 0, representing no budget associated to the wishlist
+     */
     public void setBudget(double budget) {
         if (budget > 0) {
             this.budget = budget;
@@ -268,6 +273,4 @@ public class Wishlist {
             this.budget = 0;
         }
     }
-
-
 }

@@ -8,6 +8,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+// Unit tests for Wishlist class
 public class WishlistTest {
     Wishlist testWishlist;
     Wishlist testWishlistSortedByPrice;
