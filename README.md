@@ -16,3 +16,5 @@ have a more relaxing time.
 - As a user, I want to be able to sort the items in a wishlist based on their price
 - As a user, I want to be able to see the total costs within a wishlist
 - As a user, I want to be able to make sure that I can't add items to the wishlist when I've exceeded my budget
+- As a user, I want to have the option to either save the wishlist to a file or not when quitting the application
+- As a user, when I start the application, I want to be given the option to load my wishlist from a file
