@@ -1,9 +1,12 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 import static model.ItemStatus.*;
 
 // Represents an item with a name, quantity, price (in dollars), and a status
-public class Item {
+public class Item implements Writable {
     private String name;
     private int quantity;
     private double price;
@@ -68,5 +71,16 @@ public class Item {
     @Override
     public String toString() {
         return quantity + "x " + name + " @ $" + price + " Status: " + status;
+    }
+
+    // EFFECTS: returns the item this as a JSON object
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("quantity", quantity);
+        json.put("price", price);
+        json.put("status", status);
+        return json;
     }
 }

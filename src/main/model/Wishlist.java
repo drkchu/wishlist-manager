@@ -1,12 +1,16 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
 // Represents a wishlist with a name, budget, a list of tags, and a list of items
-public class Wishlist {
+public class Wishlist implements Writable {
     private String name;
     private double budget;
     private List<Item> items = new ArrayList<Item>();
@@ -223,6 +227,27 @@ public class Wishlist {
             }
         }
         return false;
+    }
+
+    // EFFECTS: returns the wishlist this as a JSON object
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("budget", budget);
+        json.put("items", itemsToJson());
+        return json;
+    }
+
+    // EFFECTS: returns things in this workroom as a JSON array
+    private JSONArray itemsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Item i : items) {
+            jsonArray.put(i.toJson());
+        }
+
+        return jsonArray;
     }
 
     /*

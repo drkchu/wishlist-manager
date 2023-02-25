@@ -11,6 +11,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+// Unit tests for the JSON reader class that loads a wishlist from the wishlist.json file
 public class JsonReaderTest extends JsonTest {
 
     @Test

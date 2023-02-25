@@ -4,7 +4,9 @@ import model.Item;
 import model.ItemStatus;
 import model.Wishlist;
 import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -12,6 +14,7 @@ import java.util.Scanner;
 public class WishlistApp {
     private static final String JSON_STORE = "./data/wishlist.json";
     private JsonReader jsonReader;
+    private JsonWriter jsonWriter;
     private Wishlist wishlist;
     private Scanner scan;
 
@@ -22,6 +25,7 @@ public class WishlistApp {
         scan = new Scanner(System.in);
         scan.useDelimiter("\n");
         jsonReader = new JsonReader(JSON_STORE);
+        jsonWriter = new JsonWriter(JSON_STORE);
         runWishlistManager();
     }
 
@@ -37,6 +41,9 @@ public class WishlistApp {
             displayOptions();
             command = scan.next().toLowerCase();
             if (command.equals("q")) {
+                if (wishlist != null) {
+                    doSaveWishlist();
+                }
                 keepGoing = false;
             } else {
                 processCommand(command);
@@ -72,7 +79,11 @@ public class WishlistApp {
         if (command.equals("w")) {
             doCreateNewWishlist();
         } else if (command.equals("l")) {
-            loadWishlist();
+            try {
+                loadWishlist();
+            } catch (Exception e) {
+                System.out.println("There is nothing saved yet!");
+            }
         } else if (wishlist != null) {
             if (command.equals("n")) {
                 doAddNewItem();
@@ -402,6 +413,26 @@ public class WishlistApp {
         }
     }
 
+    /*
+     * EFFECTS: saves the wishlist to the wishlist.json file if prompted by the user
+     */
+    private void doSaveWishlist() {
+        String choice = "";
+        System.out.println("Would you like to save the current wishlist " + wishlist.getName() + "?");
+        while (!choice.equals("0") && !choice.equals("1")) {
+            System.out.println("\t0 -> no");
+            System.out.println("\t1 -> yes");
+            choice = scan.next();
+            if (choice.equals("0")) {
+                System.out.println(wishlist.getName() + " will not be saved!");
+            } else if (choice.equals("1")) {
+                saveWishlist();
+            } else {
+                invalidSelectionMessage();
+            }
+        }
+    }
+
     // MODIFIES: this
     // EFFECTS: loads wishlist from file
     private void loadWishlist() {
@@ -410,6 +441,18 @@ public class WishlistApp {
             System.out.println("Loaded " + wishlist.getName() + " from " + JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
+
+    // EFFECTS: saves the workroom to file
+    private void saveWishlist() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(wishlist);
+            jsonWriter.close();
+            System.out.println("Saved " + wishlist.getName() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
         }
     }
 

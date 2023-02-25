@@ -1,5 +1,5 @@
 {
-  "name": "School Supplies",
-  "budget": 100.00,
-  "items": []
+    "name": "School Supplies",
+    "items": [],
+    "budget": 100
 }

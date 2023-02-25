@@ -1,24 +1,24 @@
 {
-  "name": "School Supplies",
-  "budget": 100.00,
-  "items": [
-    {
-      "name": "Backpack",
-      "quantity": 2,
-      "price": 65.00,
-      "status": "PURCHASED"
-    },
-    {
-      "name": "Pencil Case",
-      "quantity": 1,
-      "price": 12.00,
-      "status": "PURCHASED"
-    },
-    {
-      "name": "Erasers",
-      "quantity": 12,
-      "price": 1.25,
-      "status": "PENDING"
-    }
-  ]
+    "name": "School Supplies",
+    "items": [
+        {
+            "quantity": 2,
+            "price": 65,
+            "name": "Backpack",
+            "status": "PURCHASED"
+        },
+        {
+            "quantity": 1,
+            "price": 12,
+            "name": "Pencil Case",
+            "status": "PURCHASED"
+        },
+        {
+            "quantity": 12,
+            "price": 1.25,
+            "name": "Erasers",
+            "status": "PENDING"
+        }
+    ],
+    "budget": 1000
 }
