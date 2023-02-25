@@ -3,11 +3,15 @@ package ui;
 import model.Item;
 import model.ItemStatus;
 import model.Wishlist;
+import persistence.JsonReader;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 // Wishlist application to create and manage a wishlist for all of your shopping needs!
 public class WishlistApp {
+    private static final String JSON_STORE = "./data/wishlist.json";
+    private JsonReader jsonReader;
     private Wishlist wishlist;
     private Scanner scan;
 
@@ -17,6 +21,7 @@ public class WishlistApp {
     public WishlistApp() {
         scan = new Scanner(System.in);
         scan.useDelimiter("\n");
+        jsonReader = new JsonReader(JSON_STORE);
         runWishlistManager();
     }
 
@@ -46,6 +51,7 @@ public class WishlistApp {
     private void displayOptions() {
         System.out.println("\nChoose from the following options:");
         System.out.println("\tw -> create a new wishlist");
+        System.out.println("\tl -> load saved wishlist");
         if (wishlist != null) {
             System.out.println("\tn -> add a new item to the wishlist");
             System.out.println("\td -> delete an item in the wishlist");
@@ -65,6 +71,8 @@ public class WishlistApp {
     private void processCommand(String command) {
         if (command.equals("w")) {
             doCreateNewWishlist();
+        } else if (command.equals("l")) {
+            loadWishlist();
         } else if (wishlist != null) {
             if (command.equals("n")) {
                 doAddNewItem();
@@ -80,11 +88,7 @@ public class WishlistApp {
                 doSortWishlist();
             } else if (command.equals("e")) {
                 doEditManager();
-            } else {
-                invalidSelectionMessage();
             }
-        } else {
-            invalidSelectionMessage();
         }
     }
 
@@ -395,6 +399,17 @@ public class WishlistApp {
             } else {
                 invalidSelectionMessage();
             }
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads wishlist from file
+    private void loadWishlist() {
+        try {
+            wishlist = jsonReader.read();
+            System.out.println("Loaded " + wishlist.getName() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }
 

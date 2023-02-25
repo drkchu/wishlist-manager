@@ -1,0 +1,24 @@
+{
+  "name": "School Supplies",
+  "budget": 100.00,
+  "items": [
+    {
+      "name": "Pencils",
+      "quantity": 10,
+      "price": 0.25,
+      "status": "PENDING"
+    },
+    {
+      "name": "Notebooks",
+      "quantity": 3,
+      "price": 2.00,
+      "status": "PENDING"
+    },
+    {
+      "name": "Calculator",
+      "quantity": 1,
+      "price": 45.00,
+      "status": "PURCHASED"
+    }
+  ]
+}
