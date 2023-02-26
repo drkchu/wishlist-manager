@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
+// Represents a writer that writes the wishlist onto the wishlist.json file
 public class JsonWriter {
     private static final int TAB = 4;
     private PrintWriter writer;
