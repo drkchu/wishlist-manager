@@ -3,6 +3,7 @@ package ui;
 import model.Item;
 import model.ItemStatus;
 import model.Wishlist;
+import org.json.JSONException;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -79,11 +80,7 @@ public class WishlistApp {
         if (command.equals("w")) {
             doCreateNewWishlist();
         } else if (command.equals("l")) {
-            try {
-                loadWishlist();
-            } catch (Exception e) {
-                System.out.println("There is nothing saved yet!");
-            }
+            loadWishlist();
         } else if (wishlist != null) {
             if (command.equals("n")) {
                 doAddNewItem();
@@ -441,6 +438,8 @@ public class WishlistApp {
             System.out.println("Loaded " + wishlist.getName() + " from " + JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
+        } catch (JSONException e) {
+            System.out.println("There is nothing saved!");
         }
     }
 
