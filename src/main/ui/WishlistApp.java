@@ -7,13 +7,19 @@ import org.json.JSONException;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
-// Wishlist application to create and manage a wishlist for all of your shopping needs!
-public class WishlistApp {
+// Wishlist application to create and manage a wishlist for all of your shopping needs (with a GUI)!
+public class WishlistApp extends JFrame {
+    public static final int WIDTH = 1080;
+    public static final int HEIGHT = 720;
+
     private static final String JSON_STORE = "./data/wishlist.json";
+    private static final String ICON_FILE = "./data/wishlistManagerIcon.png";
     private JsonReader jsonReader;
     private JsonWriter jsonWriter;
     private Wishlist wishlist;
@@ -23,11 +29,27 @@ public class WishlistApp {
      * EFFECTS: initializes the user input and runs the wishlist manager application
      */
     public WishlistApp() {
+        initializeGraphics();
         scan = new Scanner(System.in);
         scan.useDelimiter("\n");
         jsonReader = new JsonReader(JSON_STORE);
         jsonWriter = new JsonWriter(JSON_STORE);
+        setSize(WIDTH, HEIGHT);
         runWishlistManager();
+    }
+
+    /*
+     * MODIFIES: this
+     * EFFECTS: draws the JFrame window where this WishlistApp will operate
+     */
+    private void initializeGraphics() {
+        setIconImage(new ImageIcon(ICON_FILE).getImage());
+        setLayout(null);
+        setTitle("Wishlist Manager by Derek");
+        setMinimumSize(new Dimension(WIDTH / 2, HEIGHT / 2));
+        setSize(new Dimension(WIDTH, HEIGHT));
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
     }
 
     /*
