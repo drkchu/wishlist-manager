@@ -54,15 +54,17 @@ public class WishlistApp extends JFrame implements ActionListener {
      * EFFECTS: asks for input on how to instantiate the wishlist by asking for name and budget
      */
     private void initializeWishlist() {
-        try {
-            String wishlistName = JOptionPane.showInputDialog("What would you like to call your wishlist?");
-            Double budget = Double.parseDouble(JOptionPane.showInputDialog("What would you like to set as your budget"));
-            wishlist = new Wishlist(wishlistName, budget);
-        } catch (Exception e) {
-            initializeWishlist();
-        }
+        String wishlistName = JOptionPane.showInputDialog("What would you like to call your wishlist?");
+        wishlist = new Wishlist(wishlistName, receiveBudget());
     }
 
+    private Double receiveBudget() {
+        try {
+            return Double.parseDouble(JOptionPane.showInputDialog("What would your budget to be?"));
+        } catch (Exception e) {
+            return receiveBudget();
+        }
+    }
     /*
      * MODIFIES: this
      * EFFECTS: draws the JFrame window where this WishlistApp will operate
