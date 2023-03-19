@@ -8,34 +8,59 @@ import persistence.JsonReader;
 import persistence.JsonWriter;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
-// Wishlist application to create and manage a wishlist for all of your shopping needs (with a GUI)!
-public class WishlistApp extends JFrame {
-    public static final int WIDTH = 1080;
-    public static final int HEIGHT = 720;
+// Wishlist application to create and manage a wishlist for all of your shopping needs!
+public class WishlistApp extends JFrame implements ActionListener {
+    public static final int WIDTH = 1200;
+    public static final int HEIGHT = 800;
+    public static final int BUTTON_WIDTH = 200;
+    public static final int BUTTON_HEIGHT = 100;
+
+    public static final Color BACKGROUND_COLOR = new Color(35, 47, 62);
 
     private static final String JSON_STORE = "./data/wishlist.json";
     private static final String ICON_FILE = "./data/wishlistManagerIcon.png";
+
     private JsonReader jsonReader;
     private JsonWriter jsonWriter;
     private Wishlist wishlist;
     private Scanner scan;
 
+    private JButton addItemButton;
     /*
      * EFFECTS: initializes the user input and runs the wishlist manager application
      */
     public WishlistApp() {
+        super("Wishlist Manager by Derek");
+        initializeWishlist();
+        initializeButtons();
         initializeGraphics();
         scan = new Scanner(System.in);
         scan.useDelimiter("\n");
         jsonReader = new JsonReader(JSON_STORE);
         jsonWriter = new JsonWriter(JSON_STORE);
-        setSize(WIDTH, HEIGHT);
         runWishlistManager();
+    }
+
+    /*
+     * MODIFIES: this
+     * EFFECTS: asks for input on how to instantiate the wishlist by asking for name and budget
+     */
+    private void initializeWishlist() {
+        try {
+            String wishlistName = JOptionPane.showInputDialog("What would you like to call your wishlist?");
+            Double budget = Double.parseDouble(JOptionPane.showInputDialog("What would you like to set as your budget"));
+            wishlist = new Wishlist(wishlistName, budget);
+        } catch (Exception e) {
+            initializeWishlist();
+        }
     }
 
     /*
@@ -43,13 +68,53 @@ public class WishlistApp extends JFrame {
      * EFFECTS: draws the JFrame window where this WishlistApp will operate
      */
     private void initializeGraphics() {
-        setIconImage(new ImageIcon(ICON_FILE).getImage());
-        setLayout(null);
-        setTitle("Wishlist Manager by Derek");
-        setMinimumSize(new Dimension(WIDTH / 2, HEIGHT / 2));
         setSize(new Dimension(WIDTH, HEIGHT));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        getContentPane().setBackground(BACKGROUND_COLOR);
+        initializeIcon();
+        initializeAesthetics();
         setVisible(true);
+        setSize(WIDTH, HEIGHT);
+    }
+
+    /*
+     * MODIFIES: this
+     * EFFECTS: initializes the icon for the JFrame
+     */
+    private void initializeIcon() {
+        setIconImage(new ImageIcon(ICON_FILE).getImage());
+        setMinimumSize(new Dimension(WIDTH / 2, HEIGHT / 2));
+    }
+
+    /*
+     * MODIFIES: this
+     * EFFECTS: establishes the title and labels for the JFrame
+     */
+    private void initializeAesthetics() {
+        Border border = BorderFactory.createLineBorder(new Color(20,110,180), 4);
+        JLabel title = new JLabel(wishlist.getName());
+        title.setIcon(new ImageIcon(ICON_FILE));
+        title.setHorizontalTextPosition(JLabel.CENTER);
+        title.setVerticalTextPosition(JLabel.TOP);
+        title.setForeground(new Color(255, 153, 0));
+        title.setFont(new Font("N/A",  Font.PLAIN, 40));
+        title.setBorder(border);
+        title.setVerticalAlignment(JLabel.TOP);
+        title.setHorizontalAlignment(JLabel.CENTER);
+        add(title);
+        pack();
+    }
+
+    /*
+     * MODIFIES: this
+     * EFFECTS: instantiates the buttons used to create a new item and view attributes of the wishlist
+     */
+    private void initializeButtons() {
+        addItemButton = new JButton();
+        addItemButton.setText("Add an item!");
+        addItemButton.setBounds(WIDTH / 2 - BUTTON_WIDTH / 2, HEIGHT / 2, BUTTON_WIDTH, BUTTON_HEIGHT);
+        addItemButton.addActionListener(this);
+        add(addItemButton);
     }
 
     /*
@@ -494,5 +559,12 @@ public class WishlistApp extends JFrame {
      */
     private void invalidSelectionMessage() {
         System.out.println("\nInvalid selection! Please try again!");
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == addItemButton) {
+            System.out.println("Pressed a button!");
+        }
     }
 }
