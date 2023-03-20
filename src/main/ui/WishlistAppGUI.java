@@ -26,11 +26,15 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
     private Scanner scan;
 
     private JButton addItemButton;
+    private JList<Item> itemDisplay;
+
     public WishlistAppGUI() {
         super("Wishlist Manager");
         initializeWishlist();
+        wishlist.addItem(new Item("textItem", 1, 1));
         initializeFrame();
         initializeButtons();
+        displayItems();
         jsonReader = new JsonReader(JSON_STORE);
         jsonWriter = new JsonWriter(JSON_STORE);
         this.setVisible(true);
@@ -43,7 +47,7 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
         addItemButton.setText("Add an item!");
         addItemButton.addActionListener(this);
         this.add(addItemButton);
-;    }
+    }
 
     private void initializeFrame() {
         this.setSize(new Dimension(WIDTH, HEIGHT));
@@ -111,13 +115,31 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
         }
     }
 
+    private void update() {
+        addItemButton.setEnabled(!wishlist.isExceedingBudget());
+        remove(itemDisplay);
+        displayItems();
+        revalidate();
+    }
+
+    private void displayItems() {
+        Item[] itemArray = new Item[wishlist.getItems().size()];
+        for (int k = 0; k < wishlist.getItems().size(); k++) {
+            itemArray[k] = wishlist.getItem(k);
+        }
+        itemDisplay = new JList<Item>(itemArray);
+        itemDisplay.setName("Items:");
+        this.getContentPane().add(itemDisplay);
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == addItemButton) {
             try {
                 makeItem();
+                update();
             } catch (Exception ex) {
-                System.out.println("Couldn't add the item due to a caught exception!");
+                System.out.println("Couldn't add the item!");
             }
         }
     }
