@@ -23,6 +23,3 @@ have a more relaxing time.
 
 Implementation of the saving and loading mechanisms modeled after the class provided JsonSerializationDemo application.
 Github link: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
-
-Implementation of the GUI inspired by the class provided SimpleDrawingPlayer application
-Github link: https://github.students.cs.ubc.ca/CPSC210/SimpleDrawingPlayer-Complete
