@@ -16,6 +16,7 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
     public static final int HEIGHT = 720;
     public static final Color BACKGROUND_COLOR = new Color(35,47,62);
     public static final Color TEXT_COLOR = new Color(255,153,0);
+    public static final Color ITEM_DISPLAY_COLOR = new Color(20,110,180);
 
     private static final String JSON_STORE = "./data/wishlist.json";
     private static final String ICON_STORE = "./data/wishlistManagerIcon.png";
@@ -31,7 +32,6 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
     public WishlistAppGUI() {
         super("Wishlist Manager");
         initializeWishlist();
-        wishlist.addItem(new Item("textItem", 1, 1));
         initializeFrame();
         initializeButtons();
         displayItems();
@@ -128,6 +128,7 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
             itemArray[k] = wishlist.getItem(k);
         }
         itemDisplay = new JList<Item>(itemArray);
+        itemDisplay.setBackground(ITEM_DISPLAY_COLOR);
         itemDisplay.setName("Items:");
         this.getContentPane().add(itemDisplay);
     }
