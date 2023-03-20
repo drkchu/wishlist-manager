@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Scanner;
 
+// Wishlist application to create, manage, save, and load a wishlist with graphical components!
 public class WishlistAppGUI extends JFrame implements ActionListener {
     public static final int WIDTH = 1080;
     public static final int HEIGHT = 720;
@@ -27,8 +28,13 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
     private Scanner scan;
 
     private JButton addItemButton;
+    private JButton sortByPriceButton;
+
     private JList<Item> itemDisplay;
 
+    /*
+     * EFFECTS: initializes the JFrame and creates json reader/writer
+     */
     public WishlistAppGUI() {
         super("Wishlist Manager");
         initializeWishlist();
@@ -38,17 +44,33 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
         jsonReader = new JsonReader(JSON_STORE);
         jsonWriter = new JsonWriter(JSON_STORE);
         this.setVisible(true);
-        //this.pack();
+        this.pack();
     }
 
+    /*
+     * MODIFIES: this
+     * EFFECTS: initializes the buttons to add an item and sort items
+     */
     private void initializeButtons() {
         addItemButton = new JButton();
-        addItemButton.setSize(new Dimension(200, 100));
         addItemButton.setText("Add an item!");
         addItemButton.addActionListener(this);
+        addItemButton.setFont(new Font("", Font.BOLD, 12));
         this.add(addItemButton);
+
+        sortByPriceButton = new JButton();
+        sortByPriceButton.setText("Sort items by price!");
+        sortByPriceButton.addActionListener(this);
+        sortByPriceButton.setFont(new Font("", Font.BOLD, 12));
+        this.add(sortByPriceButton);
+
+        // todo, add a thing that deletes a selected item or purchases a selected item
     }
 
+    /*
+     * MODIFIES: this
+     * EFFECTS: sets the parameters for the JFrame and generates the title and budget strings
+     */
     private void initializeFrame() {
         this.setSize(new Dimension(WIDTH, HEIGHT));
         this.setResizable(false);
@@ -59,6 +81,10 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
         generateBudget();
     }
 
+    /*
+     * MODIFIES: this
+     * EFFECTS: generates the budget string
+     */
     private void generateBudget() {
         JLabel budget = new JLabel();
         if (wishlist.getBudget() == 0) {
@@ -70,19 +96,30 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
         this.add(budget);
     }
 
+    /*
+     * MODIFIES: this
+     * EFFECTS: generates the wishlist name string
+     */
     private void generateTitle() {
         JLabel title = new JLabel(wishlist.getName());
         title.setIcon(new ImageIcon(ICON_STORE));
         title.setForeground(TEXT_COLOR);
-        title.setFont(new Font("", Font.BOLD, 30));
+        title.setFont(new Font("", Font.BOLD, 36));
         this.add(title);
     }
 
+    /*
+     * MODIFIES: wishlist
+     * EFFECTS: creates a new wishlist based on user input for name and budget
+     */
     private void initializeWishlist() {
         String wishlistName = JOptionPane.showInputDialog("What would you like to call your wishlist?");
         wishlist = new Wishlist(wishlistName, receiveBudget());
     }
 
+    /*
+     * EFFECTS: receive budget from user input
+     */
     private Double receiveBudget() {
         try {
             return Double.parseDouble(JOptionPane.showInputDialog("What would you like to set as your budget"));
@@ -91,6 +128,12 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
         }
     }
 
+    /*
+     * REQUIRES: text inputted to quantityField is a valid integer
+     *           text inputted to priceField is a valid double
+     * MODIFIES: wishlist
+     * EFFECTS: creates an item based on user input and adds it to the current wishlist
+     */
     private void makeItem() {
         JTextField nameField = new JTextField(10);
         JTextField quantityField = new JTextField(5);
@@ -115,13 +158,24 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
         }
     }
 
+    /*
+     * MODIFIES: this
+     * EFFECTS: updates the state of the GUI, specifically deactivate the addItemButton if budget is exceeded
+     *          and updates the visual components
+     */
     private void update() {
         addItemButton.setEnabled(!wishlist.isExceedingBudget());
         remove(itemDisplay);
         displayItems();
         revalidate();
+        this.pack();
     }
 
+    /*
+     * MODIFIES: this
+     * EFFECTS: displays the current items in the wishlist with a string representation with each item's
+     *          name, price, quantity, and status
+     */
     private void displayItems() {
         Item[] itemArray = new Item[wishlist.getItems().size()];
         for (int k = 0; k < wishlist.getItems().size(); k++) {
@@ -133,6 +187,10 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
         this.getContentPane().add(itemDisplay);
     }
 
+    /*
+     * MODIFIES: this, wishlist
+     * EFFECTS: processes user interaction and updates the state
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == addItemButton) {
@@ -142,6 +200,30 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
             } catch (Exception ex) {
                 System.out.println("Couldn't add the item!");
             }
+        } else if (e.getSource() == sortByPriceButton) {
+            processSort();
+            update();
+        }
+    }
+
+    /*
+     * MODIFIES: this, wishlist
+     * EFFECTS: sorts the wishlist based on total price or individual item price, determined by user input
+     */
+    private void processSort() {
+        if (wishlist.getItems().size() > 0) {
+            String[] choices = {"Sort by individual item cost", "Sort by total item cost"};
+            int result = JOptionPane.showOptionDialog(null, "How would you like to "
+                            + "sort the items in " + wishlist.getName() + "?", "Choose an option!",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, choices,
+                    choices[0]);
+            if (result == 0) {
+                wishlist.sortByIndividualPrice();
+            } else if (result == 1) {
+                wishlist.sortByPrice();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "There's items to sort!");
         }
     }
 }
