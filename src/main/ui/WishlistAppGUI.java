@@ -31,6 +31,7 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
     private JButton sortByPriceButton;
 
     private JList<Item> itemDisplay;
+    private JScrollPane scrollItemDisplay;
 
     /*
      * EFFECTS: initializes the JFrame and creates json reader/writer
@@ -161,11 +162,11 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
     /*
      * MODIFIES: this
      * EFFECTS: updates the state of the GUI, specifically deactivate the addItemButton if budget is exceeded
-     *          and updates the visual components
+     *          and updates the visual components to new state
      */
     private void update() {
         addItemButton.setEnabled(!wishlist.isExceedingBudget());
-        remove(itemDisplay);
+        remove(scrollItemDisplay);
         displayItems();
         revalidate();
         this.pack();
@@ -173,7 +174,7 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
 
     /*
      * MODIFIES: this
-     * EFFECTS: displays the current items in the wishlist with a string representation with each item's
+     * EFFECTS: displays the scrollable menu in the wishlist GUI with a string representation with each item's
      *          name, price, quantity, and status
      */
     private void displayItems() {
@@ -181,10 +182,16 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
         for (int k = 0; k < wishlist.getItems().size(); k++) {
             itemArray[k] = wishlist.getItem(k);
         }
+
         itemDisplay = new JList<Item>(itemArray);
+        itemDisplay.setVisibleRowCount(4);
+        scrollItemDisplay = new JScrollPane(itemDisplay);
+
         itemDisplay.setBackground(ITEM_DISPLAY_COLOR);
         itemDisplay.setName("Items:");
-        this.getContentPane().add(itemDisplay);
+        scrollItemDisplay.setBackground(ITEM_DISPLAY_COLOR);
+        scrollItemDisplay.setName("Items:");
+        this.getContentPane().add(scrollItemDisplay);
     }
 
     /*
