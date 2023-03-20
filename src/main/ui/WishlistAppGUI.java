@@ -1,6 +1,7 @@
 package ui;
 
 import model.Item;
+import model.ItemStatus;
 import model.Wishlist;
 import persistence.JsonReader;
 import persistence.JsonWriter;
@@ -9,14 +10,20 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Collection;
 import java.util.Scanner;
+
+import java.util.List;
 
 // Wishlist application to create, manage, save, and load a wishlist with graphical components!
 public class WishlistAppGUI extends JFrame implements ActionListener {
-    public static final int WIDTH = 1080;
-    public static final int HEIGHT = 720;
+    public static final int WIDTH = 720;
+    public static final int HEIGHT = 480;
+
     public static final Color BACKGROUND_COLOR = new Color(35,47,62);
-    public static final Color TEXT_COLOR = new Color(255,153,0);
+    public static final Color TITLE_COLOR = new Color(255,153,0);
+    public static final Color DEFAULT_TEXT_COLOR = new Color(0,0,0);
+    public static final Color EXCEEDING_BUDGET_COLOR = new Color(220, 0, 0);
     public static final Color ITEM_DISPLAY_COLOR = new Color(20,110,180);
 
     private static final String JSON_STORE = "./data/wishlist.json";
@@ -27,8 +34,12 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
     private Wishlist wishlist;
     private Scanner scan;
 
+    private JLabel budget;
+
     private JButton addItemButton;
     private JButton sortByPriceButton;
+    private JButton deleteSelectedItemButton;
+    private JButton purchaseSelectedItemButton;
 
     private JList<Item> itemDisplay;
     private JScrollPane scrollItemDisplay;
@@ -45,12 +56,12 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
         jsonReader = new JsonReader(JSON_STORE);
         jsonWriter = new JsonWriter(JSON_STORE);
         this.setVisible(true);
-        this.pack();
+        //this.pack();
     }
 
     /*
      * MODIFIES: this
-     * EFFECTS: initializes the buttons to add an item and sort items
+     * EFFECTS: initializes the buttons to add, sort, delete, and purchase an item
      */
     private void initializeButtons() {
         addItemButton = new JButton();
@@ -65,7 +76,17 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
         sortByPriceButton.setFont(new Font("", Font.BOLD, 12));
         this.add(sortByPriceButton);
 
-        // todo, add a thing that deletes a selected item or purchases a selected item
+        deleteSelectedItemButton = new JButton();
+        deleteSelectedItemButton.setText("Delete selected item!");
+        deleteSelectedItemButton.addActionListener(this);
+        deleteSelectedItemButton.setFont(new Font("", Font.BOLD, 12));
+        this.add(deleteSelectedItemButton);
+
+        purchaseSelectedItemButton = new JButton();
+        purchaseSelectedItemButton.setText("Purchase selected item!");
+        purchaseSelectedItemButton.addActionListener(this);
+        purchaseSelectedItemButton.setFont(new Font("", Font.BOLD, 12));
+        this.add(purchaseSelectedItemButton);
     }
 
     /*
@@ -74,7 +95,6 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
      */
     private void initializeFrame() {
         this.setSize(new Dimension(WIDTH, HEIGHT));
-        this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.getContentPane().setBackground(BACKGROUND_COLOR);
         this.setLayout(new FlowLayout());
@@ -87,7 +107,7 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
      * EFFECTS: generates the budget string
      */
     private void generateBudget() {
-        JLabel budget = new JLabel();
+        budget = new JLabel();
         if (wishlist.getBudget() == 0) {
             budget.setText("Budget: N/A");
         } else {
@@ -104,7 +124,7 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
     private void generateTitle() {
         JLabel title = new JLabel(wishlist.getName());
         title.setIcon(new ImageIcon(ICON_STORE));
-        title.setForeground(TEXT_COLOR);
+        title.setForeground(TITLE_COLOR);
         title.setFont(new Font("", Font.BOLD, 36));
         this.add(title);
     }
@@ -166,10 +186,15 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
      */
     private void update() {
         addItemButton.setEnabled(!wishlist.isExceedingBudget());
-        remove(scrollItemDisplay);
+        if (wishlist.isExceedingBudget()) {
+            budget.setForeground(EXCEEDING_BUDGET_COLOR);
+        } else {
+            budget.setForeground(DEFAULT_TEXT_COLOR);
+        }
+        scrollItemDisplay.setVisible(false);
         displayItems();
         revalidate();
-        this.pack();
+        //this.pack();
     }
 
     /*
@@ -192,6 +217,7 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
         scrollItemDisplay.setBackground(ITEM_DISPLAY_COLOR);
         scrollItemDisplay.setName("Items:");
         this.getContentPane().add(scrollItemDisplay);
+        scrollItemDisplay.repaint();
     }
 
     /*
@@ -203,13 +229,38 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
         if (e.getSource() == addItemButton) {
             try {
                 makeItem();
-                update();
             } catch (Exception ex) {
                 System.out.println("Couldn't add the item!");
             }
         } else if (e.getSource() == sortByPriceButton) {
             processSort();
-            update();
+        } else if (e.getSource() == deleteSelectedItemButton) {
+            deleteSelectedItem();
+        } else if (e.getSource() == purchaseSelectedItemButton) {
+            purchaseSelectedItem();
+        }
+        update();
+    }
+
+    /*
+     * MODIFIES: this, wishlist
+     * EFFECTS: removes the selected items from the wishlist
+     */
+    private void deleteSelectedItem() {
+        List<Item> itemsToDelete = itemDisplay.getSelectedValuesList();
+        for (Item i : itemsToDelete) {
+            wishlist.deleteItem(i.getName());
+        }
+    }
+
+    /*
+     * MODIFIES: this, wishlist
+     * EFFECTS: purchased the selected items in the wishlist
+     */
+    private void purchaseSelectedItem() {
+        List<Item> itemsToPurchase = itemDisplay.getSelectedValuesList();
+        for (Item i : itemsToPurchase) {
+            i.setStatus(ItemStatus.PURCHASED);
         }
     }
 
