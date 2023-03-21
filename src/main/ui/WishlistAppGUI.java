@@ -3,6 +3,7 @@ package ui;
 import model.Item;
 import model.ItemStatus;
 import model.Wishlist;
+import org.json.JSONException;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -10,6 +11,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Scanner;
 
@@ -43,6 +46,10 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
 
     private JList<Item> itemDisplay;
     private JScrollPane scrollItemDisplay;
+
+    private MenuBar menuBar = new MenuBar(this);
+
+    private JLabel title;
 
     /*
      * EFFECTS: initializes the JFrame and creates json reader/writer
@@ -98,6 +105,9 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.getContentPane().setBackground(BACKGROUND_COLOR);
         this.setLayout(new FlowLayout());
+
+        this.setJMenuBar(menuBar);
+
         generateTitle();
         generateBudget();
     }
@@ -108,11 +118,7 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
      */
     private void generateBudget() {
         budget = new JLabel();
-        if (wishlist.getBudget() == 0) {
-            budget.setText("Budget: N/A");
-        } else {
-            budget.setText("Budget: $" + wishlist.getBudget());
-        }
+        updateBudgetText();
         budget.setFont(new Font("", Font.ITALIC, 20));
         this.add(budget);
     }
@@ -122,7 +128,7 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
      * EFFECTS: generates the wishlist name string
      */
     private void generateTitle() {
-        JLabel title = new JLabel(wishlist.getName());
+        title = new JLabel(wishlist.getName());
         title.setIcon(new ImageIcon(ICON_STORE));
         title.setForeground(TITLE_COLOR);
         title.setFont(new Font("", Font.BOLD, 36));
@@ -238,6 +244,12 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
             deleteSelectedItem();
         } else if (e.getSource() == purchaseSelectedItemButton) {
             purchaseSelectedItem();
+        } else if (e.getSource() == menuBar.getSaveItem()) {
+            saveWishlist();
+        } else if (e.getSource() == menuBar.getLoadItem()) {
+            loadWishlist();
+        } else if (e.getSource() == menuBar.getQuitItem()) {
+            System.exit(0);
         }
         update();
     }
@@ -282,6 +294,47 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
             }
         } else {
             JOptionPane.showMessageDialog(null, "There's items to sort!");
+        }
+    }
+
+    // EFFECTS: saves the wishlist to file
+    private void saveWishlist() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(wishlist);
+            jsonWriter.close();
+            System.out.println("Saved " + wishlist.getName() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    /*
+     * MODIFIES: this
+     * EFFECTS: loads wishlist from file
+     */
+    private void loadWishlist() {
+        try {
+            wishlist = jsonReader.read();
+            System.out.println("Loaded " + wishlist.getName() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        } catch (JSONException e) {
+            System.out.println("There is nothing saved!");
+        }
+        title.setText(wishlist.getName());
+        updateBudgetText();
+    }
+
+    /*
+     * MODIFIES: this
+     * EFFECTS: updates the budget text on the JFrame
+     */
+    private void updateBudgetText() {
+        if (wishlist.getBudget() == 0) {
+            budget.setText("Budget: N/A");
+        } else {
+            budget.setText("Budget: $" + wishlist.getBudget());
         }
     }
 }

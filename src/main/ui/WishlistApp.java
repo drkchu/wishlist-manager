@@ -443,7 +443,7 @@ public class WishlistApp {
         }
     }
 
-    // EFFECTS: saves the workroom to file
+    // EFFECTS: saves the wishlist to file
     private void saveWishlist() {
         try {
             jsonWriter.open();

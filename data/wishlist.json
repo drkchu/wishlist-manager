@@ -1,18 +1,24 @@
 {
-    "name": "school supplies",
+    "name": "christmas 2023",
     "items": [
         {
-            "quantity": 20,
-            "price": 1,
-            "name": "pencils",
-            "status": "PENDING"
+            "quantity": 2,
+            "price": 140,
+            "name": "shoes",
+            "status": "PURCHASED"
         },
         {
             "quantity": 1,
-            "price": 1000,
-            "name": "phone",
-            "status": "PURCHASED"
+            "price": 2000,
+            "name": "boat",
+            "status": "PENDING"
+        },
+        {
+            "quantity": 2,
+            "price": 1400,
+            "name": "iphone 15",
+            "status": "PENDING"
         }
     ],
-    "budget": 100
+    "budget": 0
 }
