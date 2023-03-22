@@ -18,7 +18,7 @@ import java.util.List;
 
 // Wishlist application to create, manage, save, and load a wishlist with graphical components!
 public class WishlistAppGUI extends JFrame implements ActionListener {
-    public final boolean KHALED = true;
+    private boolean khaled = true;
 
     public static final int WIDTH = 720;
     public static final int HEIGHT = 480;
@@ -193,7 +193,7 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
                     Double.parseDouble(priceField.getText())));
         }
 
-        if (KHALED & wishlist.isExceedingBudget()) {
+        if (khaled & wishlist.isExceedingBudget()) {
             new ImageDisplay(KHALED_STORE);
         }
     }

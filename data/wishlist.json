@@ -3,14 +3,14 @@
     "items": [
         {
             "quantity": 1,
-            "price": 122,
-            "name": "33",
+            "price": 12,
+            "name": "23",
             "status": "PENDING"
         },
         {
-            "quantity": 1,
-            "price": 2,
-            "name": "1",
+            "quantity": 12,
+            "price": 12,
+            "name": "32",
             "status": "PENDING"
         }
     ],
