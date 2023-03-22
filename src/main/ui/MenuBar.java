@@ -1,13 +1,10 @@
 package ui;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 // Class that represents information of the menu bar associated with the GUI
 public class MenuBar extends JMenuBar {
     JMenu menuFile = new JMenu("File");
-    JMenu menuAbout = new JMenu("About");
 
     JMenuItem saveItem = new JMenuItem("Save");
     JMenuItem loadItem = new JMenuItem("Load");
@@ -22,7 +19,6 @@ public class MenuBar extends JMenuBar {
         loadItem.addActionListener(gui);
         quitItem.addActionListener(gui);
         this.add(menuFile);
-        this.add(menuAbout);
     }
 
     public JMenuItem getSaveItem() {
@@ -36,4 +32,5 @@ public class MenuBar extends JMenuBar {
     public JMenuItem getQuitItem() {
         return quitItem;
     }
+
 }

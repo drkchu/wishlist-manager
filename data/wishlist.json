@@ -1,24 +1,18 @@
 {
-    "name": "christmas 2023",
+    "name": "123",
     "items": [
         {
-            "quantity": 2,
-            "price": 140,
-            "name": "shoes",
-            "status": "PURCHASED"
+            "quantity": 1,
+            "price": 122,
+            "name": "33",
+            "status": "PENDING"
         },
         {
             "quantity": 1,
-            "price": 2000,
-            "name": "boat",
-            "status": "PENDING"
-        },
-        {
-            "quantity": 2,
-            "price": 1400,
-            "name": "iphone 15",
+            "price": 2,
+            "name": "1",
             "status": "PENDING"
         }
     ],
-    "budget": 0
+    "budget": 123
 }

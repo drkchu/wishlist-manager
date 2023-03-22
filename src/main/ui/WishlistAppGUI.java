@@ -13,13 +13,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Collection;
-import java.util.Scanner;
 
 import java.util.List;
 
 // Wishlist application to create, manage, save, and load a wishlist with graphical components!
 public class WishlistAppGUI extends JFrame implements ActionListener {
+    public final boolean KHALED = true;
+
     public static final int WIDTH = 720;
     public static final int HEIGHT = 480;
 
@@ -31,11 +31,11 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
 
     private static final String JSON_STORE = "./data/wishlist.json";
     private static final String ICON_STORE = "./data/wishlistManagerIcon.png";
+    private static final String KHALED_STORE = "./data/djKhaled.jpg";
 
-    private JsonReader jsonReader;
-    private JsonWriter jsonWriter;
+    private final JsonReader jsonReader;
+    private final JsonWriter jsonWriter;
     private Wishlist wishlist;
-    private Scanner scan;
 
     private JLabel budget;
 
@@ -47,7 +47,8 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
     private JList<Item> itemDisplay;
     private JScrollPane scrollItemDisplay;
 
-    private MenuBar menuBar = new MenuBar(this);
+    private final MenuBar menuBar = new MenuBar(this);
+    private BudgetApprovedBar budgetApprovedBar;
 
     private JLabel title;
 
@@ -59,11 +60,19 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
         initializeWishlist();
         initializeFrame();
         initializeButtons();
+        initializeBudgetApprovedBar();
         displayItems();
         jsonReader = new JsonReader(JSON_STORE);
         jsonWriter = new JsonWriter(JSON_STORE);
         this.setVisible(true);
-        //this.pack();
+    }
+
+    private void initializeBudgetApprovedBar() {
+        budgetApprovedBar = new BudgetApprovedBar(wishlist);
+        budgetApprovedBar.setBounds(100, 100, 300, 40);
+        budgetApprovedBar.updateBar();
+        budgetApprovedBar.setStringPainted(true);
+        this.add(budgetApprovedBar);
     }
 
     /*
@@ -183,6 +192,10 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
             wishlist.addItem(new Item(nameField.getText(), Integer.parseInt(quantityField.getText()),
                     Double.parseDouble(priceField.getText())));
         }
+
+        if (KHALED & wishlist.isExceedingBudget()) {
+            new ImageDisplay(KHALED_STORE);
+        }
     }
 
     /*
@@ -198,9 +211,9 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
             budget.setForeground(DEFAULT_TEXT_COLOR);
         }
         scrollItemDisplay.setVisible(false);
+        budgetApprovedBar.updateBar();
         displayItems();
         revalidate();
-        //this.pack();
     }
 
     /*
@@ -322,8 +335,11 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
         } catch (JSONException e) {
             System.out.println("There is nothing saved!");
         }
+        remove(budgetApprovedBar);
+        initializeBudgetApprovedBar();
         title.setText(wishlist.getName());
         updateBudgetText();
+        update();
     }
 
     /*
