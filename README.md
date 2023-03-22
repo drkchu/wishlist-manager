@@ -23,3 +23,7 @@ have a more relaxing time.
 
 Implementation of the saving and loading mechanisms modeled after the class provided JsonSerializationDemo application.
 Github link: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+
+Image of DJ Khaled:
+Young, A. (2019, June 10). DJ Khaled threatening to sue Billboard after his latest album fails to go No. 1. Consequence.
+https://consequence.net/2019/06/dj-khaled-billboard-lawsuit/
