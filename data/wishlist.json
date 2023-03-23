@@ -1,18 +1,18 @@
 {
-    "name": "123",
+    "name": "christmas wishlist",
     "items": [
         {
-            "quantity": 1,
-            "price": 12,
-            "name": "23",
+            "quantity": 2,
+            "price": 100,
+            "name": "shoes",
             "status": "PENDING"
         },
         {
-            "quantity": 12,
-            "price": 12,
-            "name": "32",
-            "status": "PENDING"
+            "quantity": 2311,
+            "price": 1,
+            "name": "Paper",
+            "status": "PURCHASED"
         }
     ],
-    "budget": 123
+    "budget": 0
 }

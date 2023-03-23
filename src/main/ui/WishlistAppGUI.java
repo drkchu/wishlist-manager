@@ -18,7 +18,7 @@ import java.util.List;
 
 // Wishlist application to create, manage, save, and load a wishlist with graphical components!
 public class WishlistAppGUI extends JFrame implements ActionListener {
-    private boolean khaled = true;
+    private final boolean khaled = true;
 
     public static final int WIDTH = 720;
     public static final int HEIGHT = 480;
@@ -67,6 +67,10 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
         this.setVisible(true);
     }
 
+    /*
+     * MODIFIES: this, budgetApprovedBar
+     * EFFECTS: initializes the progress bar and sets the bounds
+     */
     private void initializeBudgetApprovedBar() {
         budgetApprovedBar = new BudgetApprovedBar(wishlist);
         budgetApprovedBar.setBounds(100, 100, 300, 40);

@@ -5,9 +5,13 @@ import model.Wishlist;
 import javax.swing.*;
 import java.awt.*;
 
+// Class that represents the progress bar that represents how much budget is left for the wishlist
 public class BudgetApprovedBar extends JProgressBar {
     Wishlist wishlist;
 
+    /*
+     * EFFECTS: creates a progress bar that represents the amount of budget remaining in the wishlist
+     */
     public BudgetApprovedBar(Wishlist wishlist) {
         this.wishlist = wishlist;
         this.setStringPainted(true);
@@ -16,8 +20,11 @@ public class BudgetApprovedBar extends JProgressBar {
         this.setFont(new Font("N/A", Font.BOLD, 12));
     }
 
+    /*
+     * MODIFIES: this
+     * EFFECTS: updates the bar based on the amount of budget remaining in the wishlist
+     */
     public void updateBar() {
-        this.setForeground(Color.GREEN);
         this.setValue((int)((wishlist.getTotalCosts() / wishlist.getBudget()) * 100));
         this.setString("");
         if (wishlist.getBudget() == 0) {
@@ -25,7 +32,6 @@ public class BudgetApprovedBar extends JProgressBar {
             this.setString("No Budget!");
         } else if (wishlist.isExceedingBudget()) {
             this.setValue(100);
-            this.setForeground(Color.RED);
             this.setString("Budget not approved!");
         }
         this.setVisible(true);
