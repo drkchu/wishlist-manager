@@ -27,3 +27,13 @@ Github link: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 Image of DJ Khaled:
 Young, A. (2019, June 10). DJ Khaled threatening to sue Billboard after his latest album fails to go No. 1. Consequence.
 https://consequence.net/2019/06/dj-khaled-billboard-lawsuit/
+
+# Instructions for Grader
+
+- You can generate the first required action related to adding Xs to a Y by clicking on the "Add an item!" button
+- You can generate the second required action related to adding Xs to a Y by clicking on the "Sort items by price!" button
+- You can locate my visual component by looking to the left of the items panel where there is a progress bar that describes
+    how much of the budget is used. In addition, if you exceed your budget, there is a special image that is displayed.
+- You can save the state of my application by clicking on the "File" menu and then clicking "Save" in the dropdown menu
+- You can reload the state of my application by clicking on the "File" menu and then clicking "Load" in the dropdown menu
+
