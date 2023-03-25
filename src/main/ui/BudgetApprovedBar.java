@@ -30,6 +30,9 @@ public class BudgetApprovedBar extends JProgressBar {
         if (wishlist.getBudget() == 0) {
             this.setValue(0);
             this.setString("No Budget!");
+        } else if (wishlist.getBudget() == wishlist.getTotalCosts()) {
+            this.setValue(100);
+            this.setString("Maximum budget achieved!");
         } else if (wishlist.isExceedingBudget()) {
             this.setValue(100);
             this.setString("Budget not approved!");
