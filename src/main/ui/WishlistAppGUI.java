@@ -258,9 +258,9 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
         } else if (e.getSource() == sortByPriceButton) {
             processSort();
         } else if (e.getSource() == deleteSelectedItemButton) {
-            deleteSelectedItem();
+            deleteSelectedItems();
         } else if (e.getSource() == purchaseSelectedItemButton) {
-            purchaseSelectedItem();
+            purchaseSelectedItems();
         } else if (e.getSource() == menuBar.getSaveItem()) {
             saveWishlist();
         } else if (e.getSource() == menuBar.getLoadItem()) {
@@ -275,7 +275,7 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
      * MODIFIES: this, wishlist
      * EFFECTS: removes the selected items from the wishlist
      */
-    private void deleteSelectedItem() {
+    private void deleteSelectedItems() {
         List<Item> itemsToDelete = itemDisplay.getSelectedValuesList();
         for (Item i : itemsToDelete) {
             wishlist.deleteItem(i.getName());
@@ -286,7 +286,7 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
      * MODIFIES: this, wishlist
      * EFFECTS: purchased the selected items in the wishlist
      */
-    private void purchaseSelectedItem() {
+    private void purchaseSelectedItems() {
         List<Item> itemsToPurchase = itemDisplay.getSelectedValuesList();
         for (Item i : itemsToPurchase) {
             i.setStatus(ItemStatus.PURCHASED);
