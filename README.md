@@ -28,6 +28,9 @@ Image of DJ Khaled:
 Young, A. (2019, June 10). DJ Khaled threatening to sue Billboard after his latest album fails to go No. 1. Consequence.
 https://consequence.net/2019/06/dj-khaled-billboard-lawsuit/
 
+Implementation of EventLog and Event along with corresponding test classes provided by class provided AlarmSystem application
+Github link: https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
+
 # Instructions for Grader
 
 - You can generate the first required action related to adding Xs to a Y by clicking on the "Add an item!" button
