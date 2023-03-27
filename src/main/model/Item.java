@@ -26,6 +26,7 @@ public class Item implements Writable {
         } else {
             this.price = 0;
         }
+        EventLog.getInstance().logEvent(new Event("Created a new item: " + itemName));
     }
 
     public String getName() {
@@ -57,6 +58,7 @@ public class Item implements Writable {
     }
 
     public void setStatus(ItemStatus status) {
+        EventLog.getInstance().logEvent(new Event("Item " + getName() + " status has been set to " + status));
         this.status = status;
     }
 

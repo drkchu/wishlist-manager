@@ -1,9 +1,9 @@
 {
-    "name": "Christmas",
+    "name": "christmas",
     "items": [{
-        "quantity": 10,
-        "price": 1.5,
-        "name": "Socks",
+        "quantity": 1,
+        "price": 1000,
+        "name": "too much stuff1",
         "status": "PURCHASED"
     }],
     "budget": 100

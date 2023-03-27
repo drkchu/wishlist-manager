@@ -1,5 +1,7 @@
 package ui;
 
+import model.Event;
+import model.EventLog;
 import model.Item;
 import model.ItemStatus;
 import model.Wishlist;
@@ -193,8 +195,9 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
                 "Please enter an item!", JOptionPane.OK_CANCEL_OPTION);
 
         if (result == 0) {
-            wishlist.addItem(new Item(nameField.getText(), Integer.parseInt(quantityField.getText()),
-                    Double.parseDouble(priceField.getText())));
+            Item newItem = new Item(nameField.getText(), Integer.parseInt(quantityField.getText()),
+                    Double.parseDouble(priceField.getText()));
+            wishlist.addItem(newItem);
         }
 
         if (khaled & wishlist.isExceedingBudget()) {
@@ -266,6 +269,10 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
         } else if (e.getSource() == menuBar.getLoadItem()) {
             loadWishlist();
         } else if (e.getSource() == menuBar.getQuitItem()) {
+            for (Event event : EventLog.getInstance()) {
+                System.out.println(event.getDescription());
+                //todo this is nasty looking fix later
+            }
             System.exit(0);
         }
         update();
@@ -320,7 +327,6 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
             jsonWriter.open();
             jsonWriter.write(wishlist);
             jsonWriter.close();
-            System.out.println("Saved " + wishlist.getName() + " to " + JSON_STORE);
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);
         }
@@ -333,7 +339,6 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
     private void loadWishlist() {
         try {
             wishlist = jsonReader.read();
-            System.out.println("Loaded " + wishlist.getName() + " from " + JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
         } catch (JSONException e) {

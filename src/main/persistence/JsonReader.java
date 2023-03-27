@@ -1,8 +1,6 @@
 package persistence;
 
-import model.Item;
-import model.ItemStatus;
-import model.Wishlist;
+import model.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -26,6 +24,7 @@ public class JsonReader {
     public Wishlist read() throws IOException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
+        EventLog.getInstance().logEvent(new Event("Loading wishlist from file..."));
         return parseWishlist(jsonObject);
     }
 

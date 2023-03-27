@@ -27,6 +27,8 @@ public class Wishlist implements Writable {
         } else {
             this.budget = 0;
         }
+        EventLog.getInstance().logEvent(new Event("Created " + wishlistName + " with a budget of $"
+                + wishlistBudget));
     }
 
     /*
@@ -41,6 +43,7 @@ public class Wishlist implements Writable {
         for (int k = 0; k < items.size(); k++) {
             if (items.get(k).getName().equals(name)) {
                 items.remove(k);
+                EventLog.getInstance().logEvent(new Event(name + " has been deleted from " + getName()));
                 return true;
             }
         }
@@ -57,6 +60,10 @@ public class Wishlist implements Writable {
     public boolean addItem(Item item) {
         if (!containsItemName(item.getName()) && !isExceedingBudget()) {
             items.add(item);
+            EventLog.getInstance().logEvent(new Event("Added " + item + " to " + getName()));
+            if (isExceedingBudget()) {
+                EventLog.getInstance().logEvent(new Event("Budget of $" + getBudget() + " has been exceeded"));
+            }
             return true;
         }
         return false;
@@ -182,9 +189,8 @@ public class Wishlist implements Writable {
     public boolean isExceedingBudget() {
         if (budget == 0) {
             return false;
-        } else {
-            return getTotalCosts() > budget;
         }
+        return getTotalCosts() > budget;
     }
 
     /*
@@ -199,6 +205,7 @@ public class Wishlist implements Writable {
                 return Double.valueOf(i1.getTotalPrice()).compareTo(i2.getTotalPrice());
             }
         });
+        EventLog.getInstance().logEvent(new Event(getName() + "'s items have been sorted by price."));
         return items;
     }
 
@@ -214,6 +221,8 @@ public class Wishlist implements Writable {
                 return Double.valueOf(i1.getPrice()).compareTo(i2.getPrice());
             }
         });
+        EventLog.getInstance().logEvent(new Event(getName() + "'s items have been sorted by "
+                + "individual price."));
         return items;
     }
 
