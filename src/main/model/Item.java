@@ -57,6 +57,10 @@ public class Item implements Writable {
         this.price = price;
     }
 
+    /*
+     * MODIFIES: this
+     * EFFECTS: sets this status and adds an event accordingly
+     */
     public void setStatus(ItemStatus status) {
         EventLog.getInstance().logEvent(new Event("Item " + getName() + " status has been set to " + status));
         this.status = status;

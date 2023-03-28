@@ -19,6 +19,47 @@ have a more relaxing time.
 - As a user, I want to have the option to either save the wishlist to a file or not when quitting the application
 - As a user, when I start the application, I want to be given the option to load my wishlist from a file
 
+# Instructions for Grader
+
+- You can generate the first required action related to adding Xs to a Y by clicking on the "Add an item!" button
+- You can generate the second required action related to adding Xs to a Y by clicking on the "Sort items by price!" button
+- You can locate my visual component by looking to the left of the items panel where there is a progress bar that describes
+    how much of the budget is used. In addition, if you exceed your budget, there is a special image that is displayed.
+- You can save the state of my application by clicking on the "File" menu and then clicking "Save" in the dropdown menu
+- You can reload the state of my application by clicking on the "File" menu and then clicking "Load" in the dropdown menu
+
+## Phase 4: Task 2
+
+Created Eric's Birthday with a budget of $1000.0
+
+Created a new item: Shoes
+
+Added 2x Shoes @ $120.0 Status: PENDING to Eric's Birthday
+
+Created a new item: Skateboard
+
+Added 1x Skateboard @ $160.0 Status: PENDING to Eric's Birthday
+
+Item Shoes status has been set to PURCHASED
+
+Item Skateboard status has been set to PURCHASED
+
+Eric's Birthday's items have been sorted by price.
+
+Created a new item: Phone
+
+Added 1x Phone @ $800.0 Status: PENDING to Eric's Birthday
+
+Budget of $1000.0 has been exceeded
+
+Phone has been deleted from Eric's Birthday
+
+Created a new item: Headphones
+
+Added 1x Headphones @ $500.0 Status: PENDING to Eric's Birthday
+
+Item Headphones status has been set to PURCHASED
+
 ### Citations
 
 Implementation of the saving and loading mechanisms modeled after the class provided JsonSerializationDemo application.
@@ -30,13 +71,3 @@ https://consequence.net/2019/06/dj-khaled-billboard-lawsuit/
 
 Implementation of EventLog and Event along with corresponding test classes provided by class provided AlarmSystem application
 Github link: https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
-
-# Instructions for Grader
-
-- You can generate the first required action related to adding Xs to a Y by clicking on the "Add an item!" button
-- You can generate the second required action related to adding Xs to a Y by clicking on the "Sort items by price!" button
-- You can locate my visual component by looking to the left of the items panel where there is a progress bar that describes
-    how much of the budget is used. In addition, if you exceed your budget, there is a special image that is displayed.
-- You can save the state of my application by clicking on the "File" menu and then clicking "Save" in the dropdown menu
-- You can reload the state of my application by clicking on the "File" menu and then clicking "Load" in the dropdown menu
-

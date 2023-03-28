@@ -13,13 +13,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import java.util.List;
 
 // Wishlist application to create, manage, save, and load a wishlist with graphical components!
-public class WishlistAppGUI extends JFrame implements ActionListener {
+public class WishlistAppGUI extends JFrame implements ActionListener, WindowListener {
     private final boolean khaled = true;
 
     public static final int WIDTH = 720;
@@ -67,6 +69,7 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
         jsonReader = new JsonReader(JSON_STORE);
         jsonWriter = new JsonWriter(JSON_STORE);
         this.setVisible(true);
+        addWindowListener(this);
     }
 
     /*
@@ -269,13 +272,20 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
         } else if (e.getSource() == menuBar.getLoadItem()) {
             loadWishlist();
         } else if (e.getSource() == menuBar.getQuitItem()) {
-            for (Event event : EventLog.getInstance()) {
-                System.out.println(event.getDescription());
-                //todo this is nasty looking fix later
-            }
+            printAllEvents();
             System.exit(0);
         }
         update();
+    }
+
+    /*
+     * REQUIRES: An instance of EventLog has been created
+     * EFFECTS: Prints all events that have occurred to the console
+     */
+    private void printAllEvents() {
+        for (Event event : EventLog.getInstance()) {
+            System.out.println(event.getDescription() + "\n");
+        }
     }
 
     /*
@@ -361,5 +371,43 @@ public class WishlistAppGUI extends JFrame implements ActionListener {
         } else {
             budget.setText("Budget: $" + wishlist.getBudget());
         }
+    }
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+
+    }
+
+    /*
+     * EFFECTS: prints all events when the window is closed
+     */
+    @Override
+    public void windowClosing(WindowEvent e) {
+        printAllEvents();
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+
     }
 }
