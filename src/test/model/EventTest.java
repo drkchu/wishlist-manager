@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class EventTest {
 	private Event e;
+    private Event e2;
 	private Date d;
 	
 	//NOTE: these tests might fail if time at which line (2) below is executed
@@ -22,6 +23,7 @@ public class EventTest {
 	@BeforeEach
 	public void runBefore() {
 		e = new Event("Added an item!");   // (1)
+        e2 = new Event("Deleted an item!");
 		d = Calendar.getInstance().getTime();   // (2)
 	}
 	
@@ -42,8 +44,13 @@ public class EventTest {
     }
 
     @Test
+    public void testEqualsDifferentDescription() {
+        assertNotEquals(e, e2);
+    }
+
+    @Test
     public void testHashCode() {
-        Event e2 = new Event("Added an item!");
+        e2 = new Event("Added an item!");
         assertEquals(e2.hashCode(), e.hashCode());
     }
 
