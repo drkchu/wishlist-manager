@@ -13,7 +13,7 @@ import java.util.List;
 public class Wishlist implements Writable {
     private String name;
     private double budget;
-    private List<Item> items = new ArrayList<Item>();
+    private final List<Item> items = new ArrayList<Item>();
 
     /*
      * REQUIRES: wishlistName has a non-zero length and wishlistBudget >= 0
