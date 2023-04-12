@@ -18,6 +18,7 @@ import java.awt.event.WindowListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import java.sql.SQLOutput;
 import java.util.List;
 
 // Wishlist application to create, manage, save, and load a wishlist with graphical components!
@@ -284,6 +285,7 @@ public class WishlistAppGUI extends JFrame implements ActionListener, WindowList
      */
     private void printAllEvents() {
         for (Event event : EventLog.getInstance()) {
+            System.out.print(event.getDate() + ": ");
             System.out.println(event.getDescription() + "\n");
         }
     }

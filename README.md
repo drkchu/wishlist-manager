@@ -34,35 +34,45 @@ have a more relaxing time.
 
 ## Phase 4: Task 2
 
-Created Eric's Birthday with a budget of $1000.0
+Wed Apr 12 16:11:23 PDT 2023: Created a new item: Sake
 
-Created a new item: Shoes
+Wed Apr 12 16:11:23 PDT 2023: Added 3x Sake @ $40.0 Status: PENDING to Trip to Japan
 
-Added 2x Shoes @ $120.0 Status: PENDING to Eric's Birthday
+Wed Apr 12 16:11:44 PDT 2023: Created a new item: Figurines
 
-Created a new item: Skateboard
+Wed Apr 12 16:11:44 PDT 2023: Added 2x Figurines @ $45.0 Status: PENDING to Trip to Japan
 
-Added 1x Skateboard @ $160.0 Status: PENDING to Eric's Birthday
+Wed Apr 12 16:12:47 PDT 2023: Created a new item: Camera
 
-Item Shoes status has been set to PURCHASED
+Wed Apr 12 16:12:47 PDT 2023: Added 1x Camera @ $500.0 Status: PENDING to Trip to Japan
 
-Item Skateboard status has been set to PURCHASED
+Wed Apr 12 16:13:34 PDT 2023: Created a new item: Shoes
 
-Eric's Birthday's items have been sorted by price.
+Wed Apr 12 16:13:34 PDT 2023: Added 1x Shoes @ $250.0 Status: PENDING to Trip to Japan
 
-Created a new item: Phone
+Wed Apr 12 16:13:53 PDT 2023: Created a new item: Glasses
 
-Added 1x Phone @ $800.0 Status: PENDING to Eric's Birthday
+Wed Apr 12 16:13:53 PDT 2023: Added 1x Glasses @ $100.0 Status: PENDING to Trip to Japan
 
-Budget of $1000.0 has been exceeded
+Wed Apr 12 16:13:53 PDT 2023: Budget of $1000.0 has been exceeded
 
-Phone has been deleted from Eric's Birthday
+Wed Apr 12 16:14:16 PDT 2023: Shoes has been deleted from Trip to Japan
 
-Created a new item: Headphones
+Wed Apr 12 16:14:20 PDT 2023: Trip to Japan's items have been sorted by price.
 
-Added 1x Headphones @ $500.0 Status: PENDING to Eric's Birthday
+Wed Apr 12 16:14:35 PDT 2023: Item Figurines status has been set to PURCHASED
 
-Item Headphones status has been set to PURCHASED
+Wed Apr 12 16:14:35 PDT 2023: Item Glasses status has been set to PURCHASED
+
+Wed Apr 12 16:14:35 PDT 2023: Item Sake status has been set to PURCHASED
+
+Wed Apr 12 16:14:35 PDT 2023: Item Camera status has been set to PURCHASED
+
+Wed Apr 12 16:15:40 PDT 2023: Created a new item: Pudding
+
+Wed Apr 12 16:15:40 PDT 2023: Added 5x Pudding @ $1.0 Status: PENDING to Trip to Japan
+
+Wed Apr 12 16:15:43 PDT 2023: Item Pudding status has been set to PURCHASED
 
 ## Phase 4: Task 3
 If I had more time to work on my project, I would refactor accordingly to improve the design:
