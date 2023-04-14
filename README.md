@@ -12,7 +12,7 @@ there are too many items that I want to buy. This application will allow the use
 buy). My hope in creating this application is to ease the stress that comes with online shopping so that everyone can
 have a more relaxing time. 
 
-## User Stories
+## Objectives:
 
 - As a user, I want to be able to `create and add an arbitrary number of items it to a wishlist`
 - As a user, I want to be able to delete an item from a wishlist
@@ -23,7 +23,7 @@ have a more relaxing time.
 - As a user, I want to have the option to either save the wishlist to a file or not when quitting the application
 - As a user, when I start the application, I want to be given the option to load my wishlist from a file
 
-# Instructions for Grader
+# How to use:
 
 - You can generate the first required action related to adding Xs to a Y by clicking on the `Add an item!` button
 - You can generate the second required action related to adding Xs to a Y by clicking on the `Sort items by price!` button
@@ -32,7 +32,7 @@ have a more relaxing time.
 - You can save the state of my application by clicking on the `File` menu and then clicking `Save` in the dropdown menu
 - You can reload the state of my application by clicking on the `File` menu and then clicking `Load` in the dropdown menu
 
-## Phase 4: Task 2
+## Sample event log:
 
 Wed Apr 12 16:11:23 PDT 2023: Created a new item: Sake
 
@@ -74,7 +74,7 @@ Wed Apr 12 16:15:40 PDT 2023: Added 5x Pudding @ $1.0 Status: PENDING to Trip to
 
 Wed Apr 12 16:15:43 PDT 2023: Item Pudding status has been set to PURCHASED
 
-## Phase 4: Task 3
+## Future improvements:
 If I had more time to work on my project, I would refactor accordingly to improve the design:
 
 ### Increase cohesion in WishlistAppGUI:
@@ -96,12 +96,6 @@ Using this design pattern would make future improvement to my GUI easier since a
 
 ### Citations
 
-Implementation of the saving and loading mechanisms modeled after the class provided JsonSerializationDemo application.
-Github link: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
-
 Image of DJ Khaled:
 Young, A. (2019, June 10). DJ Khaled threatening to sue Billboard after his latest album fails to go No. 1. Consequence.
 https://consequence.net/2019/06/dj-khaled-billboard-lawsuit/
-
-Implementation of EventLog and Event along with corresponding test classes provided by class provided AlarmSystem application
-Github link: https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
