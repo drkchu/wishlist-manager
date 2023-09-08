@@ -4,6 +4,10 @@
 <img src="./data/wishlistManagerIcon.png" alt="WishlistManager icon" class="center">
 </div>
 
+<p align="center">
+  <img style="border: 4px solid black" src="./wishlist.png" />
+</p>
+
 ## Project Overview
 
 I often feel lost shopping online, whether that be due to me trying to adhere to a set budget or feeling like 
