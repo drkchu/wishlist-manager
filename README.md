@@ -1,11 +1,7 @@
 ># <center> Wishlist by Derek </center>
 
-<div style="text-align: center;">
-<img src="./data/wishlistManagerIcon.png" alt="WishlistManager icon" class="center">
-</div>
-
 <p align="center">
-  <img style="border: 4px solid black" src="./wishlist.png" />
+  <img style="border: 4px solid black" src="./wishlist.png" alt="WishlistManager icon" />
 </p>
 
 ## Project Overview
