@@ -1,4 +1,4 @@
-># <center> Wishlist by Derek </center>
+># <center> Wishlist Manager by Derek </center>
 
 <p align="center">
   <img style="border: 4px solid black" src="./wishlist.png" alt="WishlistManager icon" />
