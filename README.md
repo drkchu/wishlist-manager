@@ -75,7 +75,7 @@ Wed Apr 12 16:15:40 PDT 2023: Added 5x Pudding @ $1.0 Status: PENDING to Trip to
 Wed Apr 12 16:15:43 PDT 2023: Item Pudding status has been set to PURCHASED
 
 ## Future improvements:
-If I had more time to work on my project, I would refactor accordingly to improve the design:
+I would refactor accordingly to improve the design:
 
 ### Increase cohesion in WishlistAppGUI:
 Currently, WishlistAppGUI is in charge of saving/reading from file, combining components into a GUI, and managing the wishlist itself. This violates the Single Responsibility Principle, as the WishlistAppGUI should really only be in charge of displaying the current state of the wishlist. 
