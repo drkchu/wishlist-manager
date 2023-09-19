@@ -25,14 +25,25 @@ have a more relaxing time.
 
 # How to use:
 
-- You can generate the first required action related to adding Xs to a Y by clicking on the `Add an item!` button
-- You can generate the second required action related to adding Xs to a Y by clicking on the `Sort items by price!` button
-- You can locate my visual component by looking to the left of the items panel where there is a progress bar that describes
-    how much of the budget is used. In addition, if you exceed your budget, there is a special image that is displayed.
-- You can save the state of my application by clicking on the `File` menu and then clicking `Save` in the dropdown menu
-- You can reload the state of my application by clicking on the `File` menu and then clicking `Load` in the dropdown menu
+## Adding Xs to Your Y:
 
-## Sample event log:
+To add items to your wishlist, simply click on the `Add an item!` button.
+
+## Sorting Your Wishlist:
+
+If you want to organize your wishlist by price, click on the `Sort items by price!` button.
+
+## Tracking Your Budget:
+
+On the left side of the items panel, you'll find a progress bar that visually represents your budget usage. If you happen to exceed your budget, a special image will be displayed to alert you.
+
+## Managing Your Wishlist:
+
+You can save the current state of your wishlist by navigating to the `File` menu and selecting `Save` from the dropdown menu.
+
+To reload a previously saved state of your wishlist, go to the `File` menu and choose `Load` from the dropdown menu.
+
+# Sample event log:
 
 Wed Apr 12 16:11:23 PDT 2023: Created a new item: Sake
 
@@ -74,7 +85,7 @@ Wed Apr 12 16:15:40 PDT 2023: Added 5x Pudding @ $1.0 Status: PENDING to Trip to
 
 Wed Apr 12 16:15:43 PDT 2023: Item Pudding status has been set to PURCHASED
 
-## Future improvements:
+# Future improvements:
 I would refactor accordingly to improve the design:
 
 ### Increase cohesion in WishlistAppGUI:
